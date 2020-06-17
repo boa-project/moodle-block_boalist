@@ -1,0 +1,84 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template block_boalist/viewresource
+
+    This template renders the dialog to view the info about a resource.
+
+    Example context (json):
+    {}
+}}
+
+<div class="one-item">
+    <div class="preview" title="{{metadata.general.title.none}}">
+        {{{custom.preview}}}
+    </div>
+    <div class="social-box">
+        <span class="social type">
+            <label>{{custom.type}}</label>
+        </span>
+        <span class="social views">
+            {{#pix}} i/hide, core, {{#str}} views, block_boalist {{/str}} {{/pix}}
+            <label>{{social.views}}</label>
+        </span>
+        <span class="social score">
+            {{#pix}} i/star, core, {{#str}} likes, block_boalist {{/str}} {{/pix}}
+            <label>{{custom.score}}</label>
+        </span>
+    </div>
+
+    <p class="description">{{metadata.general.description.none}}</p>
+
+    <div class="keywords">
+        <strong>{{#str}} keywords, block_boalist {{/str}}</strong>
+        {{metadata.general.keywords.none}}
+    </div>
+
+    <div class="rate">
+        <strong>{{#str}} rate, block_boalist {{/str}}</strong>
+        <span class="scale">
+            <span boa-act="rate" data-value="1">{{#pix}} i/star, core, {{#str}} like1, block_boalist {{/str}} {{/pix}}</span>
+            <span boa-act="rate" data-value="2">{{#pix}} i/star, core, {{#str}} like2, block_boalist {{/str}} {{/pix}}</span>
+            <span boa-act="rate" data-value="3">{{#pix}} i/star, core, {{#str}} like3, block_boalist {{/str}} {{/pix}}</span>
+            <span boa-act="rate" data-value="4">{{#pix}} i/star, core, {{#str}} like4, block_boalist {{/str}} {{/pix}}</span>
+            <span boa-act="rate" data-value="5">{{#pix}} i/star, core, {{#str}} like5, block_boalist {{/str}} {{/pix}}</span>
+        </span>
+    </div>
+
+    <div class="foot">
+        <span>
+            <a href="{{about}}/!/" target="_blank">
+                {{#str}} original, block_boalist {{/str}}
+                {{#pix}} i/down, core, {{#str}} download, block_boalist {{/str}}{{/pix}}
+            </a>
+        </span>
+
+        {{#custom.alternates}}
+        <span>
+            <a href="{{url}}" target="_blank">{{text}} {{#pix}}i/down, core, {{#str}} download, block_boalist {{/str}}{{/pix}}</a>
+        </span>
+        {{/custom.alternates}}
+
+        {{#custom.socialnetworks}}
+        <span>
+            <a href="{{url}}" target="_blank">
+                <i class="fa fa-{{icon}}"></i>
+            </a>
+        </span>
+        {{/custom.socialnetworks}}
+    </div>
+</div>

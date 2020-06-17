@@ -1,0 +1,62 @@
+.block_boalist .content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-top: 20px;
+}
+
+.block_boalist .one-resource {
+    max-width: 200px;
+    margin: 0 10px 10px;
+    overflow: hidden;
+    -webkit-box-shadow: 4px 4px 4px #bbb;
+    box-shadow: 4px 4px 4px #bbb;
+    padding: 0 0 40px;
+    position: relative;
+}
+
+.block_boalist .customicon-box {
+    height: 160px;
+    overflow: hidden;
+    text-align: center;
+}
+
+.block_boalist .customicon-box img {
+    width: 100%;
+}
+
+.block_boalist .panel-body {
+    padding: 5px;
+    text-align: center;
+}
+
+.block_boalist .panel-body a {
+    color: #4c6295;
+    font-weight: bold;
+}
+
+.block_boalist .panel-body label {
+    font-weight: bold;
+    font-size: 1.2;
+}
+
+.block_boalist .panel-foot {
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding-bottom: 5px;
+}
+
+.block_boalist .panel-foot .btn {
+    background-color: #587fe3;
+    color: #fff;
+    border: none;
+    font-weight: bold;
+    border-radius: 3px;
+}
+
+.block_boalist .panel-foot .btn:hover {
+    background-color: #4c6295;
+}
