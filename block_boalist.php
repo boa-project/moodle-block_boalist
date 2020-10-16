@@ -116,7 +116,7 @@ class block_boalist extends block_base {
                 $html .= html_writer::end_tag('span');
 
                 $score = is_object($resource->social->score) && property_exists($resource->social->score, 'avg') > 0 ?
-                            $resource->social->score->avg . '*' . $resource->social->score->count : 0;
+                            $resource->social->score->avg . '/' . $resource->social->score->count : 0;
                 $html .= html_writer::start_tag('span', array('class' => 'social score'));
                 $html .= $OUTPUT->pix_icon('i/star', get_string('likes', 'block_boalist'));
                 $html .= html_writer::tag('label', $score);
