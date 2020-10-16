@@ -30,6 +30,18 @@ define(['jquery', 'core/modal_factory', 'core/templates', 'core/notification'],
     var chooseview = function(data) {
 
         var src = '';
+
+        // If it is a external resource.
+        if (data.manifest.conexion_type && data.manifest.conexion_type == 'external') {
+            $res = $('<iframe></iframe>');
+            $res.attr('src', data.manifest.url);
+
+            $reslink = $('<p><a target="_blank"></a></p>');
+            $reslink.find('a').attr('href', data.manifest.url).html(data.manifest.url);
+
+            return $res.get(0).outerHTML + $reslink.get(0).outerHTML;
+        }
+
         if (data.manifest.alternate && data.manifest.entrypoint) {
             var alterpath = data.about + '/!/.alternate/' + data.manifest.entrypoint + '/';
 
@@ -90,6 +102,11 @@ define(['jquery', 'core/modal_factory', 'core/templates', 'core/notification'],
         return $res.get(0).outerHTML;
     };
 
+    var isdownloadable = function(data) {
+        //ToDo: validate by content type.
+        return !data.manifest.conexion_type || data.manifest.conexion_type != 'external';
+    };
+
     /**
      * Initialise all for the block.
      *
@@ -116,6 +133,7 @@ define(['jquery', 'core/modal_factory', 'core/templates', 'core/notification'],
                                                 data.metadata.technical.format : '';
                         data.custom.score = 'avg' in data.social.score ?
                                                 data.social.score.avg + ' / ' + data.social.score.count : 0;
+                        data.custom.downloadable = isdownloadable(data);
 
                         $.each(socialnetworks, function(i, v) {
                             v.url = v.url.replace('{url}', encodeURI(data.about + '/!/'));

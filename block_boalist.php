@@ -164,7 +164,7 @@ class block_boalist extends block_base {
             }
         }
 
-        return $item->manifest->customicon;
+        return $item->manifest->customicon . '?s=256';
     }
 
 }
