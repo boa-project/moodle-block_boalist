@@ -8,9 +8,12 @@
 .block_boalist .one-resource {
     max-width: 200px;
     margin: 0 10px 10px;
+    color: #404674;
     overflow: hidden;
+    background-color: #f7f9fa;
     -webkit-box-shadow: 4px 4px 4px #bbb;
     box-shadow: 4px 4px 4px #bbb;
+    border-radius: 20px;
     padding: 0 0 40px;
     position: relative;
 }
@@ -59,4 +62,95 @@
 
 .block_boalist .panel-foot .btn:hover {
     background-color: #4c6295;
+}
+
+.block_boalist .panel-cover {
+    display: none;
+}
+
+.block_boalist .one-resource:hover .panel-cover {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(100, 100, 100, 0.7);
+    text-align: center;
+    cursor: pointer;
+}
+
+.block_boalist .one-resource:hover .panel-cover i {
+    font-size: 80px;
+    line-height: 0;
+    width: 100%;
+    color: #fff;
+}
+
+.block_boalist .panel-foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.block_boalist-modal .social-box .social .icon,
+.block_boalist .panel-foot .social .icon {
+    margin-right: 3px;
+}
+
+.block_boalist-modal .social-box .social label,
+.block_boalist .panel-foot .social label {
+    margin: 0;
+    font-size: 12px;
+}
+
+.block_boalist-modal .preview video,
+.block_boalist-modal .preview img {
+    max-width: 100%;
+}
+
+.block_boalist-modal .social-box {
+    margin: 0 0 10px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-evenly;
+    border-bottom: 2px solid #eee;
+}
+
+.block_boalist-modal .foot {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-evenly;
+    border-top: 2px solid #eee;
+    padding-top: 5px;
+    margin-top: 10px;
+}
+
+.block_boalist-modal .foot > span {
+    border-bottom: 1px solid #bbb;
+    margin-right: 5px;
+}
+
+.block_boalist-modal .modal-title {
+    margin-top: 0;
+}
+
+.block_boalist-modal .keywords,
+.block_boalist-modal .rate {
+    padding-top: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.block_boalist-modal .rate [data-value] {
+    filter: grayscale(1);
+}
+
+.block_boalist-modal .rate .active[data-value],
+.block_boalist-modal .rate [data-value]:hover {
+    filter: grayscale(0);
+    cursor: pointer;
 }

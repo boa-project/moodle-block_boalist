@@ -16,7 +16,7 @@
 
 
 /**
- * Strings for component 'block_boalist', language 'en', branch 'MOODLE_31_STABLE'
+ * Strings for component 'block_boalist', language 'en'
  *
  * @package   block_boalist
  * @copyright 2020 David Herney @ BambuCo
@@ -55,8 +55,3 @@ $string['like2'] = '2';
 $string['like3'] = 'Indifferent';
 $string['like4'] = '3';
 $string['like5'] = 'Like';
-$string[''] = '';
-$string[''] = '';
-$string[''] = '';
-$string[''] = '';
-$string[''] = '';

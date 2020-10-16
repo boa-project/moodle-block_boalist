@@ -115,7 +115,7 @@ define(['jquery', 'core/modal_factory', 'core/templates', 'core/notification'],
                         data.custom.type = (data.metadata.technical && data.metadata.technical.format) ?
                                                 data.metadata.technical.format : '';
                         data.custom.score = 'avg' in data.social.score ?
-                                                data.social.score.avg + '*' + data.social.score.count : 0;
+                                                data.social.score.avg + ' / ' + data.social.score.count : 0;
 
                         $.each(socialnetworks, function(i, v) {
                             v.url = v.url.replace('{url}', encodeURI(data.about + '/!/'));
