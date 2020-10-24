@@ -161,6 +161,10 @@ define(['jquery', 'core/modal_factory', 'core/templates', 'core/notification'],
                             data.custom.alternates[data.custom.alternates.length] = one;
                         });
 
+                        if (typeof(data.metadata.general.keywords.none) == 'object') {
+                            data.metadata.general.keywords.none = data.metadata.general.keywords.none.join(', ');
+                        }
+
                         var template = Templates.render('block_boalist/viewresource', data)
                             .then(function(html, js) {
                                 modalresource.setTitle(data.metadata.general.title.none);

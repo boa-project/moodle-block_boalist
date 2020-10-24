@@ -30,7 +30,7 @@ $string['boalist:addinstance'] = 'Adicionar un nuevo bloque Listado de BoA';
 $string['boalist:myaddinstance'] = 'Adicionar un nuevo bloque Listado de BoA al área personal';
 
 $string['customtitle'] = 'Título personalizado';
-$string['query'] = 'COnsulta';
+$string['query'] = 'Consulta';
 $string['query_help'] = 'Una consulta HTTP válida para BoA';
 $string['resultssize'] = 'Cantidad de resultados';
 $string['showmore'] = 'Mostrar más resultados';
@@ -39,7 +39,7 @@ $string['privacy:metadata'] = 'El bloque Listado de BoA solo muestra recursos ex
 $string['likes'] = 'Calificación';
 $string['views'] = 'Vistas';
 $string['dialogviewtitle'] = 'Ver';
-$string['keywords'] = 'Palabras clave';
+$string['keywords'] = 'Palabras claves';
 $string['download'] = 'Descargar';
 $string['socialnetworks'] = 'Redes sociales';
 $string['socialnetworks_help'] = 'Una red social por línea, con la estructura: nombre-icono|URL. La URL puede usar las claves: {url} y {name}.';
