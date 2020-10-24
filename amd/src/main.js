@@ -135,12 +135,18 @@ define(['jquery', 'core/modal_factory', 'core/templates', 'core/notification'],
                                                 data.social.score.avg + ' / ' + data.social.score.count : 0;
                         data.custom.downloadable = isdownloadable(data);
 
+                        var socialnetworksitems = [];
                         $.each(socialnetworks, function(i, v) {
-                            v.url = v.url.replace('{url}', encodeURI(data.about + '/!/'));
-                            v.url = v.url.replace('{name}', data.metadata.general.title.none);
+                            var url = v.url.replace('{url}', encodeURI(data.about + '/!/'));
+                            url = url.replace('{name}', data.metadata.general.title.none);
+
+                            var item = {};
+                            item.url = url;
+                            item.icon = v.icon;
+                            socialnetworksitems.push(item);
                         });
 
-                        data.custom.socialnetworks = socialnetworks;
+                        data.custom.socialnetworks = socialnetworksitems;
 
                         data.custom.alternates = [];
                         $.each(data.manifest.alternate, function(i, alt) {
