@@ -154,8 +154,17 @@ class block_boalist extends block_base {
     }
 
     private function choosepreview($item) {
-        if (property_exists($item->manifest, 'alternate') && property_exists($item->manifest, 'entrypoint')) {
-            $alterpath = $item->about . '/!/.alternate/' . $item->manifest->entrypoint;
+        if (property_exists($item->manifest, 'alternate')) {
+
+            if (strpos($item->id, '/content/') !== false) {
+                $alternatebase = substr($item->id, strpos($item->id, '/content/') + 9);
+            } else if (property_exists($item->manifest, 'entrypoint')) {
+                $alternatebase = $item->manifest->entrypoint;
+            } else {
+                return $item->manifest->customicon . '?s=256';
+            }
+
+            $alterpath = $item->about . '/!/.alternate/' . $alternatebase;
 
             if (in_array('preview.png', $item->manifest->alternate)) {
                 return $alterpath . '/preview.png';

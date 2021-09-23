@@ -21,11 +21,8 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-define(['jquery', 'core/modal_factory', 'core/templates', 'core/notification'],
-        function($, ModalFactory, Templates, Notification) {
-
-    var wwwroot = M.cfg.wwwroot;
-
+define(['jquery', 'core/modal_factory', 'core/modal_events', 'core/templates'],
+        function($, ModalFactory, ModalEvents, Templates) {
 
     var chooseview = function(data) {
 
@@ -36,25 +33,32 @@ define(['jquery', 'core/modal_factory', 'core/templates', 'core/notification'],
             $res = $('<iframe></iframe>');
             $res.attr('src', data.manifest.url);
 
-            $reslink = $('<p><a target="_blank"></a></p>');
+            var $reslink = $('<p><a target="_blank"></a></p>');
             $reslink.find('a').attr('href', data.manifest.url).html(data.manifest.url);
 
             return $res.get(0).outerHTML + $reslink.get(0).outerHTML;
         }
 
         if (data.manifest.alternate && data.manifest.entrypoint) {
-            var alterpath = data.about + '/!/.alternate/' + data.manifest.entrypoint + '/';
+            var alternatebase;
+            if (data.id.indexOf('/content/') >= 0) {
+                alternatebase = data.id.substr(data.id.indexOf('/content/') + 9);
+            } else {
+                alternatebase = data.manifest.entrypoint;
+            }
+
+            var alterpath = data.about + '/!/.alternate/' + alternatebase + '/';
 
             if (data.metadata.technical.format.match(/video/gi) ||
             data.metadata.technical.format.match(/audio/gi) ||
             data.metadata.technical.format.match(/image/gi)) {
 
-                var name = data.manifest.alternate.find(e => /small/g.test(e))
+                var name = data.manifest.alternate.find(e => /small/g.test(e));
 
                 if (name) {
                     src = alterpath + name;
                 } else {
-                    name = data.manifest.alternate.find(e => /medium/g.test(e))
+                    name = data.manifest.alternate.find(e => /medium/g.test(e));
                     if (name) {
                         src = alterpath + name;
                     } else {
@@ -62,7 +66,7 @@ define(['jquery', 'core/modal_factory', 'core/templates', 'core/notification'],
                     }
                 }
             } else {
-                name = data.manifest.alternate.find(e => /thumb/g.test(e))
+                name = data.manifest.alternate.find(e => /thumb/g.test(e));
                 if (name) {
                     src = alterpath + name;
                 } else {
@@ -112,10 +116,10 @@ define(['jquery', 'core/modal_factory', 'core/templates', 'core/notification'],
      *
      */
     var init = function(socialnetworks) {
-        $('.block_boalist .one-resource').each(function(i, v) {
+        $('.block_boalist .one-resource').each(function() {
             var $resource = $(this);
 
-            $resource.find('.panel-cover').on('click', function(e) {
+            $resource.find('.panel-cover').on('click', function() {
 
                 var modalresource = $resource.data('modal');
 
@@ -125,7 +129,7 @@ define(['jquery', 'core/modal_factory', 'core/templates', 'core/notification'],
                 }
 
                 var request = $.get($resource.data('about'))
-                    .then(function( data, textStatus, jqXHR ) {
+                    .then(function( data ) {
 
                         data.custom = {};
                         data.custom.preview = chooseview(data);
@@ -162,7 +166,7 @@ define(['jquery', 'core/modal_factory', 'core/templates', 'core/notification'],
                             var one = {
                                 "text": str,
                                 "url": data.about + '/!/.alternate/' + data.manifest.entrypoint + '/' + alt
-                            }
+                            };
 
                             data.custom.alternates[data.custom.alternates.length] = one;
                         });
@@ -172,7 +176,7 @@ define(['jquery', 'core/modal_factory', 'core/templates', 'core/notification'],
                         }
 
                         var template = Templates.render('block_boalist/viewresource', data)
-                            .then(function(html, js) {
+                            .then(function(html) {
                                 modalresource.setTitle(data.metadata.general.title.none);
 
                                 var $html = $(html);
@@ -182,7 +186,7 @@ define(['jquery', 'core/modal_factory', 'core/templates', 'core/notification'],
 
                                     var params = { value: $rate.data('value') };
 
-                                    $.post(data.about + '/scores', params, function(data) {})
+                                    $.post(data.about + '/scores', params, function() {})
                                         .done(function() {
                                             $html.find('[boa-act="rate"]').removeClass('active').each(function(key, element) {
                                                 var $element = $(element);
@@ -203,7 +207,6 @@ define(['jquery', 'core/modal_factory', 'core/templates', 'core/notification'],
                     }
                 );
 
-                var clickedLink = $(e.currentTarget);
                 ModalFactory.create({
                     body: request.promise()
                 })
@@ -211,6 +214,25 @@ define(['jquery', 'core/modal_factory', 'core/templates', 'core/notification'],
                     modalresource = modal;
                     modal.getModal().addClass('block_boalist-modal');
                     modal.show();
+
+                    var root = modal.getRoot();
+                    root.on(ModalEvents.hidden, function() {
+
+                        // Stop audio and video when close the window.
+                        $(modal.getBody()).find('video').each(function() {
+                            this.pause();
+                        });
+
+                        $(modal.getBody()).find('audio').each(function() {
+                            this.pause();
+                        });
+
+                        $(modal.getBody()).find('iframe').each(function() {
+                            let $iframe = $(this);
+                            $iframe.attr('src', 'about:blank');
+                            $resource.data('modal', null);
+                        });
+                    });
 
                     $resource.data('modal', modalresource);
                 });
