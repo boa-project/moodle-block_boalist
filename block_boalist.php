@@ -66,12 +66,15 @@ class block_boalist extends block_base {
             return $this->content;
         }
 
+        $query = str_replace('{randomtoken}', '_' . time(), $this->config->query);
+        $query = str_replace('{randomtokenday}', '_' . date('z'), $query);
+
         $curl = new curl();
-        $json = $curl->get($this->config->query);
+        $json = $curl->get($query);
 
         if (!$json) {
             $this->content->text   = '';
-            debugging('Error in response for query: ' . $this->config->query);
+            debugging('Error in response for query: ' . $query);
             return $this->content;
         }
 

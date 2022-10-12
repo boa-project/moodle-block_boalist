@@ -2,7 +2,7 @@ BLOCK BoA List
 ============================
 A block to display a list of BoA resources according a custom query.
 
-Package tested in: moodle 3.7+
+Package tested in: moodle 3.9+
 
 QUICK INSTALL
 ==============
@@ -15,5 +15,8 @@ GIT: https://github.com/boa-project/moodle-block_boalist
 
 IN VERSION
 =============
+2020061502:
+Changes to include random token in query url in order to use with resource random ordering.
+
 2020061500:
 First version
